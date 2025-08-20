@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MY_PORTFOLIO</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      color: #00ff00;
+      font-family: monospace;
+      overflow-x: hidden;
+    }
+    /* Matrix Rainfall Background */
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none; /* Fix clicks on top */
+    }
+    .container {
+      position: relative;
+      z-index: 1;
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 10px;
+      box-shadow: 0 0 20px #00ff00;
+    }
+    h1, h2 {
+      text-align: center;
+      text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+    }
+    p {
+      text-align: center;
+      font-size: 18px;
+    }
+    .project-list a, .contact a {
+      display: block;
+      color: #00ffff;
+      text-decoration: none;
+      text-align: center;
+      margin: 6px 0;
+      transition: 0.3s;
+    }
+    .project-list a:hover, .contact a:hover {
+      color: #ff00ff;
+      text-shadow: 0 0 8px #ff00ff;
+    }
+    .skills-list {
+      text-align: center;
+      padding: 0;
+    }
+    .skills-list li {
+      list-style: none;
+      margin: 5px 0;
+      font-size: 18px;
+    }
+    .section {
+      margin: 40px 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Rainfall Background -->
+  <canvas id="matrix"></canvas>
+
+  <div class="container">
+    <h1>MY_PORTFOLIO</h1>
+    <h2>Hi, I'm <span style="color:#ff00ff">Arivananthan</span></h2>
+    <p>Frontend and Web Developer,Web Designer,Photographer,Videographer.</p>
+
+    <!-- About -->
+    <div class="section">
+      <h2>About Me</h2>
+      <p>
+        I am passionate about learning new technologies, solving problems, and continuously improving my skills.  
+        I work with dedication and focus, and I always try to understand concepts deeply before applying them.  
+        I adapt quickly to new challenges, communicate effectively, and contribute positively to teamwork.  
+        My goal is to grow with the company, deliver high-quality projects, and always keep learning.
+      </p>
+    </div>
+
+    <!-- Projects -->
+    <div class="section">
+      <h2>My Projects</h2>
+      <div class="project-list">
+        <a href="https://github.com/ARIVA108/MY_PORTFOLIO" target="_blank">MY_PORTFOLIO</a>
+        <a href="https://github.com/ARIVA108/DELIGHTPHOTOGRAPHY" target="_blank">DELIGHT PHOTOGRAPHY (Frontend)</a>
+        <a href="https://github.com/ARIVA108/LibrarySystem" target="_blank">Library System</a>
+        <a herf="https://github.com/ARIVA108/Online_Purchase-App"target="_blank">Online_Purchase-App</a>
+      </div>
+    </div>
+
+    <!-- Skills -->
+    <div class="section">
+      <h2>My Skills</h2>
+      <ul class="skills-list">
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+        <li>Python</li>
+        <li>React</li>
+        <li>SQL</li>
+        <li>C</li>
+      </ul>
+    </div>
+    </div>
+    <!-- Contact -->
+    <div class="section contact">
+      <h2>Contact Me</h2>
+      <a href="tel:+918940423461">📞 8940423461</a>
+      <a href="mailto:arivananthan144@gmail.com">📧 arivananthan144@gmail.com</a>
+      <a href="https://github.com/ARIVA108" target="_blank">🌐 GitHub: ARIVA108</a>
+    </div>
+  </div>
+
+  <!-- Matrix Rain Script -->
+  <script>
+    const canvas = document.getElementById("matrix");
+    const ctx = canvas.getContext("2d");
+
+    function resizeCanvas() {
+      canvas.height = window.innerHeight;
+      canvas.width = window.innerWidth;
+    }
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    const letters = "01";
+    const fontSize = 16;
+    let columns = Math.floor(canvas.width / fontSize);
+    const drops = Array.from({ length: columns }).fill(1);
+
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#0f0";
+      ctx.font = fontSize + "px monospace";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+    setInterval(draw, 35);
+  </script>
+</body>
+</html>
